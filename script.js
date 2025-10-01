@@ -42,17 +42,19 @@ function checkWinner() {
     }
     return false;
 }
-
-function handleClick(e){
+function handleClick(e) {
     const id = e.target.id - 1; // convert to 0-based index
-    if(gameState[id] === ''){
+    console.log(`Cell clicked: ${id}, Current Player: ${currentPlayer}`); // Log clicked cell and current player
+
+    if (gameState[id] === '') {
         gameState[id] = currentPlayer === player1 ? 'X' : 'O';
         e.target.textContent = gameState[id];
+        console.log(`Game State: ${gameState}`); // Log the game state after the move
 
-        if(checkWinner()){
+        if (checkWinner()) {
             messageDiv.textContent = `${currentPlayer}, congratulations you won!`;
             cells.forEach(cell => cell.removeEventListener('click', handleClick));
-        } else if(!gameState.includes('')){
+        } else if (!gameState.includes('')) {
             messageDiv.textContent = `It's a tie!`;
         } else {
             // Switch player
@@ -61,3 +63,4 @@ function handleClick(e){
         }
     }
 }
+
